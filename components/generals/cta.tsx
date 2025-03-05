@@ -22,7 +22,7 @@ export default function CTA({ websiteInfo }: { websiteInfo: WebsiteInfo }) {
           </LinkButton>
           {websiteInfo.phone ? (
             <a href={`https://wa.me/62${websiteInfo.phone}`} target="_blank" rel="noopener noreferrer">
-              <div className="flex items-center justify-center gap-2 p-2 px-2 rounded overflow-hidden bg-[#25d366] text-white hover:bg-[#1fb155] transition-all">
+              <div className="flex items-center justify-center gap-2 p-2 px-2 rounded overflow-hidden bg-[#25d366] text-white hover:bg-[#1fb155] transition-all uppercase">
                 <MdiWhatsapp className="w-6 h-6" /> Hubungi Via WA
               </div>
             </a>

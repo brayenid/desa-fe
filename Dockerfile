@@ -1,11 +1,11 @@
 # Gunakan image Node.js versi terbaru
-FROM node:18
+FROM node:18-alpine
 
 # Tentukan working directory di dalam container
 WORKDIR /app
 
 # Copy package.json dan package-lock.json untuk menginstall dependency lebih cepat
-COPY package.json ./
+COPY package*.json ./
 
 # **Nonaktifkan Husky saat install dependencies**
 RUN npm install

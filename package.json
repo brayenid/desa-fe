@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "wait-on http://localhost:1338 && next start",
-    "lint": "next lint"
+    "start": "next start",
+    "lint": "next lint",
+    "start-wait": "wait-on http://localhost:1338 && next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",
@@ -31,6 +32,7 @@
     "react-medium-image-zoom": "^5.2.14",
     "react-share": "^5.1.2",
     "recharts": "^2.15.1",
+    "sharp": "^0.33.5",
     "swiper": "^11.2.3",
     "swr": "^2.3.2",
     "tailwind-merge": "^3.0.2",
@@ -41,6 +43,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
+    "@types/qs": "^6.9.18",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
