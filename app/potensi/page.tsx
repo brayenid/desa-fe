@@ -19,15 +19,13 @@ interface PageMeta {
   pageCount: number
 }
 
-const data: WebsiteInfo =
-  (
-    await fetcher(
-      `${baseConfig.server.host}/api/organization?populate[0]=logo&populate[1]=chiefImg&populate[2]=favicon`
-    )
-  ).data ?? []
+export async function generateMetadata(): Promise<Metadata> {
+  // FIX LATER
+  const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
 
-export const metadata: Metadata = {
-  title: `Potensi - ${data.webName}`
+  return {
+    title: `Potensi - ${websiteInfo.webName}`
+  }
 }
 
 export default async function Potential({ searchParams }: SearchParams) {

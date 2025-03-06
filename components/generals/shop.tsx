@@ -25,7 +25,10 @@ export interface FetchedShop {
 }
 
 export default function Shop() {
-  const { data, isLoading } = useSWR(`${baseConfig.server.host}/api/shops?populate[0]=thumbnail`, fetcher)
+  const { data, isLoading } = useSWR(
+    `${baseConfig.server.host}/api/shops?populate[0]=thumbnail&sort[1]=publishedAt:desc`,
+    fetcher
+  )
 
   const shops = (data?.data as FetchedShop[]) ?? []
 

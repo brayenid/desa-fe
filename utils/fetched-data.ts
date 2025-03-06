@@ -11,13 +11,15 @@ export async function fetcher(url: string) {
     const res = await fetch(url, {
       headers: {
         Authorization: `Bearer ${baseConfig.server.key}`
-      }
+      },
+      cache: 'no-store'
     })
     if (!res.ok) throw new Error(`Fetch failed: ${res.statusText}`)
 
     return await res.json()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.error(`Fetch error on ${url}:`, error)
+    console.error(`Fetch error on ${url}:`)
     return { data: [], meta: { pagination: { page: 1, pageSize: 10, pageCount: 1 } } }
   }
 }

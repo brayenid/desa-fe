@@ -21,15 +21,13 @@ interface PageMeta {
   pageCount: number
 }
 
-const data: WebsiteInfo =
-  (
-    await fetcher(
-      `${baseConfig.server.host}/api/organization?populate[0]=logo&populate[1]=chiefImg&populate[2]=favicon`
-    )
-  ).data ?? []
+export async function generateMetadata(): Promise<Metadata> {
+  // FIX LATER
+  const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
 
-export const metadata: Metadata = {
-  title: `Artikel - ${data.webName}`
+  return {
+    title: `Artikel - ${websiteInfo.webName}`
+  }
 }
 
 export default async function Article({ searchParams }: SearchParams) {
@@ -46,6 +44,9 @@ export default async function Article({ searchParams }: SearchParams) {
       pagination: {
         pageSize: filters.limit,
         page: filters.page
+      },
+      sort: {
+        publishedAt: 'desc'
       },
       populate: ['categories', 'thumbnail'],
       filters: filters.keyword

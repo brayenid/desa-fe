@@ -1,25 +1,29 @@
-import NotFoundBox from '@/components/generals/not-found-box'
 import HeaderStyled from '@/components/ui/header-styled'
 import LinkButton from '@/components/ui/link-button'
 import { baseConfig } from '@/utils/config'
 import { fetcher } from '@/utils/fetched-data'
 import { WebsiteInfo } from '@/utils/types'
 import { BlocksRenderer } from '@strapi/blocks-react-renderer'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import qs from 'qs'
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata(): Promise<Metadata> {
+  // FIX LATER
+  const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
+
+  return {
+    title: `Profil - ${websiteInfo.webName}`
+  }
+}
 
 export default async function Profile() {
   const query = qs.stringify({
     populate: ['mission', 'logo', 'profileBg', 'chiefImg']
   })
   const data: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization?${query}`)).data
-
-  if (!data) {
-    return <NotFoundBox text="Tidak ada ditampilkan!" />
-  }
-
   const bg = `${baseConfig.server.host}/${data.profileBg?.url.slice(1)}`
 
   return (

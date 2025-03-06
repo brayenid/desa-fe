@@ -10,16 +10,11 @@ import { WebsiteInfo } from '@/utils/types'
 import { fetcher } from '@/utils/fetched-data'
 import { baseConfig } from '@/utils/config'
 import CTA from '@/components/generals/cta'
-import NotFoundBox from '@/components/generals/not-found-box'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
   const data: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data
-
-  if (!data) {
-    return <NotFoundBox text="Tidak ada ditampilkan!" />
-  }
 
   return (
     <>

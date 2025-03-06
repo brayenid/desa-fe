@@ -1,10 +1,13 @@
 module.exports = {
   apps: [
     {
-      name: 'nextjs',
-      cwd: './web',
-      script: 'npm',
-      args: 'dev'
+      name: 'next-app',
+      script: 'node',
+      args: '.next/standalone/server.js',
+      env: {
+        NODE_ENV: 'production',
+        PORT: 3000
+      }
     }
   ]
 }

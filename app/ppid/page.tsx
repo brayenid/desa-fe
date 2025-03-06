@@ -27,15 +27,13 @@ interface FetchedPPID {
   publishedAt: string
 }
 
-const data: WebsiteInfo =
-  (
-    await fetcher(
-      `${baseConfig.server.host}/api/organization?populate[0]=logo&populate[1]=chiefImg&populate[2]=favicon`
-    )
-  ).data ?? []
+export async function generateMetadata(): Promise<Metadata> {
+  // FIX LATER
+  const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
 
-export const metadata: Metadata = {
-  title: `Artikel - ${data.webName}`
+  return {
+    title: `PPID - ${websiteInfo.webName}`
+  }
 }
 
 function PPIDCard({ data }: { data: FetchedPPID }) {
@@ -111,6 +109,9 @@ export default async function Document({ searchParams }: SearchParams) {
       pagination: {
         pageSize: filters.limit,
         page: filters.page
+      },
+      sort: {
+        publishedAt: 'desc'
       },
       filters: filters.keyword
         ? {

@@ -19,15 +19,13 @@ interface PageMeta {
   pageCount: number
 }
 
-const data: WebsiteInfo =
-  (
-    await fetcher(
-      `${baseConfig.server.host}/api/organization?populate[0]=logo&populate[1]=chiefImg&populate[2]=favicon`
-    )
-  ).data ?? []
+export async function generateMetadata(): Promise<Metadata> {
+  // FIX LATER
+  const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
 
-export const metadata: Metadata = {
-  title: `Galeri - ${data.webName}`
+  return {
+    title: `Galeri - ${websiteInfo.webName}`
+  }
 }
 
 export default async function Gallery({ searchParams }: SearchParams) {
@@ -44,6 +42,9 @@ export default async function Gallery({ searchParams }: SearchParams) {
       pagination: {
         pageSize: filters.limit,
         page: filters.page
+      },
+      sort: {
+        publishedAt: 'desc'
       },
       populate: ['categories', 'thumbnail'],
       filters: filters.keyword

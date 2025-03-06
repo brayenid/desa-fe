@@ -1,6 +1,19 @@
 import { BreadcrumbCustom, BreadcrumbData } from '@/components/generals/breadcrumb'
+import { baseConfig } from '@/utils/config'
+import { fetcher } from '@/utils/fetched-data'
+import { WebsiteInfo } from '@/utils/types'
 import { TagsIcon } from 'lucide-react'
+import { Metadata } from 'next'
 import Link from 'next/link'
+
+export async function generateMetadata(): Promise<Metadata> {
+  // FIX LATER
+  const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
+
+  return {
+    title: `SGDs - ${websiteInfo.webName}`
+  }
+}
 
 export default function Data() {
   const links: { label: string; url: string }[] = [

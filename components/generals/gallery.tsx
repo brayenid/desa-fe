@@ -42,7 +42,10 @@ export default function Gallery() {
 
   const query = qs.stringify(
     {
-      populate: ['categories', 'thumbnail']
+      populate: ['categories', 'thumbnail'],
+      sort: {
+        publishedAt: 'desc'
+      }
     },
     { encodeValuesOnly: true } // Menghindari encoding pada tanda []
   )

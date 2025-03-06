@@ -10,28 +10,38 @@ import { Navigation } from '@/components/generals/navigation'
 import { WebsiteInfo } from '@/utils/types'
 import NextTopLoader from 'nextjs-toploader'
 
-const data: WebsiteInfo =
-  (
-    await fetcher(
-      `${baseConfig.server.host}/api/organization?populate[0]=logo&populate[1]=chiefImg&populate[2]=favicon`
-    )
-  ).data ?? []
+export const dynamic = 'force-dynamic'
 
-export const metadata: Metadata = {
-  title: data.webName ?? 'Website',
-  description: data.webDesc ?? 'Deskripsi',
-  icons: {
-    icon: `${baseConfig.server.host}/${data?.favicon?.url.slice(1)}`
+export async function generateMetadata(): Promise<Metadata> {
+  // FIX LATER
+  const websiteInfo: WebsiteInfo =
+    (
+      await fetcher(
+        `${baseConfig.server.host}/api/organization?populate[0]=logo&populate[1]=chiefImg&populate[2]=favicon`
+      )
+    ).data ?? []
+
+  return {
+    title: websiteInfo.webName ?? 'Website',
+    description: websiteInfo.webDesc ?? 'Deskripsi',
+    icons: {
+      icon: `${baseConfig.server.host}/${websiteInfo?.favicon?.url.slice(1)}`
+    }
   }
 }
-
-export const dynamic = 'force-dynamic'
 
 export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const data: WebsiteInfo =
+    (
+      await fetcher(
+        `${baseConfig.server.host}/api/organization?populate[0]=logo&populate[1]=chiefImg&populate[2]=favicon`
+      )
+    ).data ?? []
+
   return (
     <html lang="en">
       <body className={`${baseConfig.style.font.poppins.className} antialiased w-full overflow-x-hidden`}>

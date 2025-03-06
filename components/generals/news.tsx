@@ -24,7 +24,7 @@ export interface FetchedNews {
 
 export default function News() {
   const { data, isLoading } = useSWR(
-    `${baseConfig.server.host}/api/articles?populate[0]=categories&populate[1]=thumbnail`,
+    `${baseConfig.server.host}/api/articles?populate[0]=categories&populate[1]=thumbnail&sort[2]=publishedAt:desc`,
     fetcher
   )
 

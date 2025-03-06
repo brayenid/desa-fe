@@ -47,15 +47,13 @@ export interface PyramidData {
   female: number
 }
 
-const webInfo: WebsiteInfo =
-  (
-    await fetcher(
-      `${baseConfig.server.host}/api/organization?populate[0]=logo&populate[1]=chiefImg&populate[2]=favicon`
-    )
-  ).data ?? []
+export async function generateMetadata(): Promise<Metadata> {
+  // FIX LATER
+  const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
 
-export const metadata: Metadata = {
-  title: `Kependudukan - ${webInfo.webName}`
+  return {
+    title: `Kependudukan - ${websiteInfo.webName}`
+  }
 }
 
 function Header({ children, className }: { children: ReactNode; className?: string }) {
@@ -320,12 +318,14 @@ export default async function Resident() {
     }
   ]
 
+  const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
+
   return (
     <div className="main-container">
       <BreadcrumbCustom data={breadcrumbs} className="mb-8" />
       <div className="text-center mb-8">
         <h1 className="text-2xl font-black tracking-widest uppercase text-center w-full">Data Kependudukan</h1>
-        <p>Selayang Pandang Data Kependudukan Desa {webInfo.webName}</p>
+        <p>Selayang Pandang Data Kependudukan Desa {websiteInfo.webName}</p>
       </div>
       <main className="space-y-8">
         <div className="border rounded-xl p-8">
