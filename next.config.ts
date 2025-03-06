@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'mamahakulu-strapi.knkdesa.my.id',
+        pathname: '/**'
       }
     ]
   },
