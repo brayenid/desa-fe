@@ -29,7 +29,7 @@ function SOTKRender({ sotk }: { sotk: FetchedSOTK[] }) {
 
   return (
     <>
-      <div className="w-max m-auto max-w-96 mb-4">
+      <div className="m-auto max-w-96 mb-4">
         <StaffCard name={sotkChief.name} img={sotkChief?.img?.url} role={sotkChief.role} />
       </div>
       <div className="grid gap-8 lg:grid-cols-3 xl:grid-cols-4">

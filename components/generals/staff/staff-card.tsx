@@ -23,7 +23,7 @@ export default function StaffCard({ name, img, role }: { name: string; img: stri
           alt={name}
           style={{
             objectFit: 'cover',
-            width: 500,
+            width: '100%',
             height: 400
           }}></Image>
       </div>
