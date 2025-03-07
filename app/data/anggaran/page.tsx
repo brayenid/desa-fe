@@ -1,4 +1,5 @@
 import { BreadcrumbCustom, BreadcrumbData } from '@/components/generals/breadcrumb'
+import { PageHeader } from '@/components/generals/main-header'
 import NotFoundBox from '@/components/generals/not-found-box'
 import PaginationCustom from '@/components/ui/pagination-form'
 import { Search } from '@/components/ui/search-form'
@@ -85,10 +86,6 @@ export default async function Budgets({ searchParams }: SearchParams) {
 
   const data = (await fetcher(requestPath)) ?? []
 
-  if (!data?.data?.length) {
-    return <NotFoundBox text="Tidak ada ditampilkan!" />
-  }
-
   const mappedBudgets = ((data?.data as FetchedBudgets[]) ?? []).map((mappedData) => {
     return {
       year: mappedData?.year ?? 0,
@@ -119,10 +116,12 @@ export default async function Budgets({ searchParams }: SearchParams) {
   return (
     <div className="main-container">
       <BreadcrumbCustom data={breadcrumbs} className="mb-8" />
-
-      <div className="text-center">
-        <h1 className="text-2xl font-bold tracking-widest uppercase text-center w-full">APBDes</h1>
-        <p>Cari data informasi APBDes berdasarkan tahun anggaran</p>
+      <div className="text-left md:text-center mb-8">
+        <PageHeader
+          title="APBDes"
+          description="Cari data informasi APBDes berdasarkan tahun anggaran"
+          className="text-left md:text-center"
+        />
       </div>
 
       <Search placeholder="Cari data sesuai tahun anggaran ..." />
@@ -139,7 +138,7 @@ export default async function Budgets({ searchParams }: SearchParams) {
           ))}
         </div>
       ) : (
-        <NotFoundBox text="Maaf kami tidak menemukan data" />
+        <NotFoundBox text="Tidak ada data ditampilkan" />
       )}
       {pageMeta?.pageCount > 1 && (
         <PaginationCustom page={pageMeta.page ?? 1} size={pageMeta.pageCount ?? 0} search={filters.keyword} />

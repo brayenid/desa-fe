@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { OpenGraphType } from 'next/dist/lib/metadata/types/opengraph-types'
 import { headers } from 'next/headers'
 import { baseConfig } from './config'
-import noImg from '@/public/assets/noimg.svg'
+import noImg from '@/public/assets/noimg.png'
 
 export type MetaImage = {
   id: string
@@ -36,7 +36,7 @@ export async function generateMeta({ title, description, image, type, websiteNam
     })
   } else {
     images.push({
-      url: noImg,
+      url: `${baseConfig.server.public}/${noImg.src.slice(1)}`,
       width: 64,
       height: 64,
       alt: 'Website Desa'

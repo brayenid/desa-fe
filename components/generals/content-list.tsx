@@ -23,7 +23,7 @@ export default function ContentList({ datas, prefixUrl }: { datas: FetchedData[]
             className="flex items-start gap-4 group rounded-xl">
             <div className="flex-[1] w-full">
               <Image
-                src={data.thumbnail.url ? `${baseConfig.server.host}/${data.thumbnail.url.slice(1)}` : noImg}
+                src={data?.thumbnail?.url ? `${baseConfig.server.host}/${data.thumbnail.url.slice(1)}` : noImg}
                 alt={data.title}
                 width={200}
                 height={80}

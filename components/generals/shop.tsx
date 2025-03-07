@@ -6,6 +6,7 @@ import { baseConfig } from '@/utils/config'
 import useSWR from 'swr'
 import { fetcher } from '@/utils/fetched-data'
 import ShopList from './shop/shop-list'
+import MainHeader from './main-header'
 
 export interface FetchedShop {
   title: string
@@ -36,7 +37,9 @@ export default function Shop() {
     return {
       title: shop?.title,
       description: shop?.description,
-      thumbnail: (shop?.thumbnail?.url).slice(1),
+      thumbnail: shop?.thumbnail?.url
+        ? `${baseConfig.server.host}/${shop?.thumbnail?.url.slice(1)}`
+        : '/assets/noimg.svg',
       price: shop?.price,
       seller: shop?.seller,
       phone: shop?.phone,
@@ -46,14 +49,15 @@ export default function Shop() {
 
   return (
     <div className="main-container">
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold tracking-widest uppercase ">Belanja Desa</h2>
-        <p>Beli produk lokal desa</p>
-      </div>
+      <MainHeader title="Belanja Dari Desa" description="Beli produk lokal desa" />
       <ShopList shopsArr={shopsMapped} isLoading={isLoading} />
-      <div className="flex justify-end my-6">
-        <LinkButton url="/belanja">Selengkapnya</LinkButton>
-      </div>
+      {shopsMapped.length ? (
+        <div className="flex justify-end my-6">
+          <LinkButton url="/belanja">Selengkapnya</LinkButton>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

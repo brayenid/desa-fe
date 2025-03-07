@@ -9,7 +9,7 @@ export default function GalleryCardSwiper({ gallery }: { gallery: Gallery }) {
       <Link href={`/galeri/${gallery.slug}`}>
         <div className="overflow-hidden relative rounded-xl">
           <Image
-            src={`${baseConfig.server.host}/${gallery?.thumbnail}`}
+            src={`${gallery.thumbnail}`}
             width={500}
             height={500}
             style={{

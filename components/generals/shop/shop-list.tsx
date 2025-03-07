@@ -2,6 +2,7 @@ import { Shop } from '@/utils/types'
 
 import { Skeleton } from '@/components/ui/skeleton'
 import ShopCard from './shop-card'
+import NotFoundBox from '../not-found-box'
 
 function ShopSkel() {
   return (
@@ -14,19 +15,15 @@ function ShopSkel() {
 }
 
 export default function ShopList({ shopsArr, isLoading }: { shopsArr: Shop[]; isLoading: boolean }) {
+  if (isLoading) return <ShopSkel />
+  if (!shopsArr.length) return <NotFoundBox text="Tidak ada ditampilkan" />
   return (
     <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-      {isLoading ? (
-        <ShopSkel />
-      ) : (
-        <>
-          {shopsArr.map((shop, i) => (
-            <div className="rounded-xl border overflow-hidden group" key={i}>
-              <ShopCard shop={shop} />
-            </div>
-          ))}
-        </>
-      )}
+      {shopsArr.map((shop, i) => (
+        <div className="rounded-xl border overflow-hidden group" key={i}>
+          <ShopCard shop={shop} />
+        </div>
+      ))}
     </div>
   )
 }

@@ -21,6 +21,26 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 }
 
+function SOTKRender({ sotk }: { sotk: FetchedSOTK[] }) {
+  if (!sotk.length) return <NotFoundBox text="Tidak ada data ditampilkan" />
+
+  const sotkChief = sotk.filter((data) => data.level === 'L1')[0]
+  const sotkMember = sotk.filter((data) => data.level !== 'L1')
+
+  return (
+    <>
+      <div className="w-max m-auto max-w-96 mb-4">
+        <StaffCard name={sotkChief.name} img={sotkChief?.img?.url} role={sotkChief.role} />
+      </div>
+      <div className="grid gap-8 lg:grid-cols-3 xl:grid-cols-4">
+        {sotkMember.map((data, i) => (
+          <StaffCard key={i} img={data?.img?.url} name={data.name} role={data.role} />
+        ))}
+      </div>
+    </>
+  )
+}
+
 export default async function Page() {
   const query = qs.stringify(
     {
@@ -32,13 +52,6 @@ export default async function Page() {
 
   const sotk: FetchedSOTK[] = (await fetcher(`${baseConfig.server.host}/api/sotks?${query}`)).data
 
-  if (!sotk.length) {
-    return <NotFoundBox text="Tidak ada ditampilkan!" />
-  }
-
-  const sotkChief = sotk.filter((data) => data.level === 'L1')[0]
-  const sotkMember = sotk.filter((data) => data.level !== 'L1')
-
   return (
     <div className="main-container md:!p-12 flex gap-8 flex-col xl:flex-row">
       <div className="space-y-4 w-full">
@@ -47,14 +60,7 @@ export default async function Page() {
           <p>Stuktur Organisasi dan Tata Kerja</p>
         </header>
         <main className="text-center ">
-          <div className="w-max m-auto max-w-96 mb-4">
-            <StaffCard name={sotkChief.name} img={sotkChief.img.url} role={sotkChief.role} />
-          </div>
-          <div className="grid gap-8 lg:grid-cols-3 xl:grid-cols-4">
-            {sotkMember.map((data, i) => (
-              <StaffCard key={i} img={data.img.url} name={data.name} role={data.role} />
-            ))}
-          </div>
+          <SOTKRender sotk={sotk} />
         </main>
       </div>
     </div>

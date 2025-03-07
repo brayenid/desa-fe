@@ -9,6 +9,7 @@ import Credit from '@/components/generals/credit'
 import { Navigation } from '@/components/generals/navigation'
 import { WebsiteInfo } from '@/utils/types'
 import NextTopLoader from 'nextjs-toploader'
+import FloatingMenu from '@/components/generals/floating-menu'
 
 export const dynamic = 'force-dynamic'
 
@@ -21,11 +22,15 @@ export async function generateMetadata(): Promise<Metadata> {
       )
     ).data ?? []
 
+  const favicon = websiteInfo?.favicon?.url
+    ? `${baseConfig.server.host}/${websiteInfo?.favicon?.url.slice(1)}`
+    : '/assets/favicon.ico'
+
   return {
     title: websiteInfo.webName ?? 'Website',
     description: websiteInfo.webDesc ?? 'Deskripsi',
     icons: {
-      icon: `${baseConfig.server.host}/${websiteInfo?.favicon?.url.slice(1)}`
+      icon: favicon
     }
   }
 }
@@ -44,7 +49,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${baseConfig.style.font.poppins.className} antialiased w-full overflow-x-hidden`}>
+      <body className={`${baseConfig.style.font.poppins.className} antialiased w-full overflow-x-hidden pb-16 sm:pb-0`}>
         <ErrorBoundary>
           <NextTopLoader showSpinner={false} />
           <TopHeader websiteInfo={data} />
@@ -54,6 +59,7 @@ export default async function RootLayout({
           </main>
           <BottomNav websiteInfo={data} />
           <Credit websiteInfo={data} />
+          <FloatingMenu />
         </ErrorBoundary>
       </body>
     </html>

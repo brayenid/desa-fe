@@ -40,23 +40,21 @@ export function Navigation({ websiteInfo }: { websiteInfo: WebsiteInfo }) {
 
   const navArr = (data?.data?.navigation?.navigation as MenuItems[]) ?? []
 
+  const navLogo = websiteInfo?.logo?.url
+    ? `${baseConfig.server.host}/${websiteInfo.logo.url.slice(1)}`
+    : '/assets/knk.png'
+
   const toggleVisibility = (): void => {
     const containerEl = containerNav.current
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    containerEl?.className.includes('show') ? containerEl.classList.remove('show') : containerEl?.classList.add('show')
+    containerEl?.classList.toggle('show')
   }
+
   return (
     <div
       className={`sticky top-0 bg-white z-50 flex items-center md:block justify-between w-full border-b py-1 ${baseConfig.style.font.poppins.className}`}>
       <nav className="flex max-w-screen-xl mx-auto p-3 pl-0">
         <Link href="/" className="flex items-center gap-2 ml-6 p-1">
-          <Image
-            src={`${baseConfig.server.host}/${websiteInfo.logo.url.slice(1)}`}
-            width={38}
-            height={38}
-            alt="logo"
-            className="w-12 lg:w-7"
-          />
+          <Image src={navLogo} width={38} height={38} alt="logo" className="w-12 lg:w-7" />
           <h1 className="text-lg uppercase font-bold hidden md:block">{websiteInfo.webName}</h1>
         </Link>
         <div className="container-nav relative flex-[2]" ref={containerNav}>
@@ -71,39 +69,39 @@ export function Navigation({ websiteInfo }: { websiteInfo: WebsiteInfo }) {
             {isLoading ? (
               <NavigationSkel>Loading</NavigationSkel>
             ) : (
-              navArr.map((menu, index) =>
-                (menu.children?.length ?? 0 > 0) ? (
+              navArr.map((menu, index) => {
+                const isActive = pathname === menu.path || pathname.startsWith(menu.path + '/')
+
+                return menu.children?.length ?? 0 > 0 ? (
                   <li className="parent-nav" key={index}>
-                    <Link href={menu.path}>
+                    <Link href={menu.path} className={isActive ? 'link-active' : ''}>
                       <span>{menu.name}</span> <LucideChevronDown className="inline w-4 h-4" />
                     </Link>
                     <ul className="subnav">
-                      {menu.children?.map((submenu, subindex) => (
-                        <li key={subindex}>
-                          <Link
-                            onClick={() => {
-                              toggleVisibility()
-                            }}
-                            href={submenu.path}>
-                            {submenu.name}
-                          </Link>
-                        </li>
-                      ))}
+                      {menu.children?.map((submenu, subindex) => {
+                        const isSubActive = pathname === submenu.path || pathname.startsWith(submenu.path + '/')
+
+                        return (
+                          <li key={subindex}>
+                            <Link
+                              onClick={toggleVisibility}
+                              href={submenu.path}
+                              className={isSubActive ? 'link-active' : ''}>
+                              {submenu.name}
+                            </Link>
+                          </li>
+                        )
+                      })}
                     </ul>
                   </li>
                 ) : (
                   <li key={index}>
-                    <Link
-                      onClick={() => {
-                        toggleVisibility()
-                      }}
-                      href={menu.path}
-                      className={`${pathname === menu.path ? 'link-active' : ''}`}>
+                    <Link onClick={toggleVisibility} href={menu.path} className={isActive ? 'link-active' : ''}>
                       {menu.name}
                     </Link>
                   </li>
                 )
-              )
+              })
             )}
           </ul>
         </div>

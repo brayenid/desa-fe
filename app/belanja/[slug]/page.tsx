@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: PageParams }): Prom
   const shop: FetchedShop = (await fetcher(`${baseConfig.server.host}/api/shops?${query}`)).data[0]
 
   return await generateMeta({
-    title: shop.title,
+    title: shop?.title,
     description: shop.description ?? 'Belanja dari desa.',
     image: shop?.thumbnail as unknown as MetaImage,
     websiteName: websiteInfo.webName,
@@ -115,7 +115,7 @@ export default async function Page({ params }: { params: PageParams }) {
           className="my-2 
         ">
           <div className="rounded-xl overflow-hidden mb-4">
-            {shop.thumbnail ? (
+            {shop?.thumbnail ? (
               <Image
                 src={`${baseConfig.server.host}/${shop.thumbnail.url.slice(1)}`}
                 width={500}
@@ -132,7 +132,7 @@ export default async function Page({ params }: { params: PageParams }) {
               ''
             )}
           </div>
-          {shop.thumbnail?.caption ? (
+          {shop?.thumbnail?.caption ? (
             <p className="pb-4 text-sm text-gray-600 text-center">{shop.thumbnail?.caption}</p>
           ) : (
             ''

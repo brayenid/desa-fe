@@ -64,10 +64,6 @@ export default async function SGDs() {
 
   const data: SGDsType = (await fetcher(`${baseConfig.server.host}/api/sgds?${query}`)).data
 
-  if (!data) {
-    return <NotFoundBox text="Tidak ada ditampilkan!" />
-  }
-
   const avgSgds = getAvgData(data)
 
   const breadcrumbs: BreadcrumbData[] = [
@@ -93,10 +89,10 @@ export default async function SGDs() {
       <BreadcrumbCustom data={breadcrumbs} className="mb-8" />
       <header className="flex gap-14 mb-8 flex-col md:flex-row">
         <div className="text-left mb-8">
-          <h1 className="text-2xl font-bold tracking-widest uppercase w-full mb-4">
+          <h1 className="text-xl md:text-2xl font-bold tracking-widest uppercase w-full mb-4">
             Data SGDs <span className="text-primary-600">{webInfo.webName}</span>
           </h1>
-          <p>
+          <p className="mb-6">
             Sustainable Development Goals (SDGs) Desa adalah upaya terpadu mewujudkan Desa tanpa kemiskinan dan
             kelaparan, Desa ekonomi tumbuh merata, Desa peduli kesehatan, Desa peduli lingkungan, Desa peduli
             pendidikan, Desa ramah perempuan, Desa berjejaring, dan Desa tanggap budaya untuk percepatan pencapaian
@@ -124,9 +120,15 @@ export default async function SGDs() {
         </div>
       </header>
       <main className="grid gap-8 xl:grid-cols-3">
-        {data.sgds.map((s, i) => (
-          <SGDsCard label={s.indicator} value={s.value} key={i} order={i + 1} />
-        ))}
+        {data.sgds.length ? (
+          <>
+            {data.sgds.map((s, i) => (
+              <SGDsCard label={s.indicator} value={s.value} key={i} order={i + 1} />
+            ))}
+          </>
+        ) : (
+          <NotFoundBox text="Tidak ada data ditampilkan" />
+        )}
       </main>
     </div>
   )

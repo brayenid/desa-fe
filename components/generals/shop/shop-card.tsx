@@ -12,7 +12,7 @@ export default function ShopCard({ shop }: { shop: Shop }) {
           {baseConfig.helpers.currencyFormat(shop.price)}
         </p>
         <Image
-          src={`${baseConfig.server.host}/${shop.thumbnail}`}
+          src={shop.thumbnail}
           alt={shop.title}
           width={500}
           height={500}

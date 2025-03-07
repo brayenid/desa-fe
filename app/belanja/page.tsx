@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/generals/main-header'
 import NotFoundBox from '@/components/generals/not-found-box'
 import { FetchedShop } from '@/components/generals/shop'
 import ShopList from '@/components/generals/shop/shop-list'
@@ -66,7 +67,9 @@ export default async function Shop({ searchParams }: SearchParams) {
   const mappedShop = ((data?.data as FetchedShop[]) ?? []).map((mappedData) => {
     return {
       title: mappedData?.title ?? '',
-      thumbnail: ((mappedData?.thumbnail?.url as string) ?? '').slice(1),
+      thumbnail: mappedData?.thumbnail?.url
+        ? `${baseConfig.server.host}/${mappedData?.thumbnail?.url.slice(1)}`
+        : '/assets/noimg.svg',
       description: mappedData?.description ?? '',
       publishedAt: mappedData?.publishedAt ? baseConfig.helpers.formatDate(mappedData.publishedAt) : '',
       slug: mappedData?.slug,
@@ -79,12 +82,12 @@ export default async function Shop({ searchParams }: SearchParams) {
 
   return (
     <div className="main-container">
-      <h1 className="text-2xl font-extrabold tracking-widest uppercase text-center w-full">Belanja Dari Desa</h1>
+      <PageHeader title="Belanja Dari Desa" />
       <Search placeholder="Cari judul penjualan..." />
       {mappedShop.length > 0 ? (
         <ShopList shopsArr={mappedShop} isLoading={false} />
       ) : (
-        <NotFoundBox text="Maaf kami tidak menemukan publikasi" />
+        <NotFoundBox text="Tidak ada data ditampilkan" />
       )}
       {pageMeta?.pageCount > 1 && (
         <PaginationCustom page={pageMeta.page ?? 1} size={pageMeta.pageCount ?? 0} search={filters.keyword} />

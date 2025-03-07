@@ -1,7 +1,7 @@
 import { BreadcrumbCustom, BreadcrumbData } from '@/components/generals/breadcrumb'
 import ScrollData from '@/components/generals/data/data-scroll'
 import { PopulationPyramid, ResidentChart } from '@/components/generals/data/resident-chart'
-import NotFoundBox from '@/components/generals/not-found-box'
+import { PageHeader } from '@/components/generals/main-header'
 import HeaderStyled from '@/components/ui/header-styled'
 import LinkButton from '@/components/ui/link-button'
 import { cn } from '@/lib/utils'
@@ -286,10 +286,6 @@ export default async function Resident() {
 
   const data: FetchedResident[] = (await fetcher(`${baseConfig.server.host}/api/residents?${query}`)).data ?? []
 
-  if (!data.length) {
-    return <NotFoundBox text="Tidak ada ditampilkan!" />
-  }
-
   const file = (await fetcher(`${baseConfig.server.host}/api/resident-file`)).data?.url
 
   const dividedBySex = divideBySex(data)
@@ -324,8 +320,10 @@ export default async function Resident() {
     <div className="main-container">
       <BreadcrumbCustom data={breadcrumbs} className="mb-8" />
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-black tracking-widest uppercase text-center w-full">Data Kependudukan</h1>
-        <p>Selayang Pandang Data Kependudukan Desa {websiteInfo.webName}</p>
+        <PageHeader
+          title="Data Kependudukan"
+          description={`Selayang Pandang Data Kependudukan Desa ${websiteInfo.webName}`}
+        />
       </div>
       <main className="space-y-8">
         <div className="border rounded-xl p-8">

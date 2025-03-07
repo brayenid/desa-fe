@@ -12,11 +12,12 @@ export interface FetchedSOTK {
 }
 
 export default function StaffCard({ name, img, role }: { name: string; img: string; role: string }) {
+  const staffImg = img ? `${baseConfig.server.host}/${img.slice(1)}` : '/assets/noimg.svg'
   return (
     <div>
       <div className="overflow-hidden relative rounded-xl max-h-96">
         <Image
-          src={`${baseConfig.server.host}/${img.slice(1)}`}
+          src={staffImg}
           width={500}
           height={500}
           alt={name}

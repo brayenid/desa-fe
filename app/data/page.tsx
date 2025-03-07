@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
 
   return {
-    title: `SGDs - ${websiteInfo.webName}`
+    title: `Data - ${websiteInfo.webName}`
   }
 }
 

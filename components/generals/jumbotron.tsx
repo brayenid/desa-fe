@@ -28,7 +28,9 @@ export default function Jumbotron({ websiteInfo }: { websiteInfo: WebsiteInfo })
     fetcher
   )
   const jumbotron = data?.data?.jumbotron?.jumbotron
-  const jumbotronImg = (jumbotron?.bigImage?.url ?? '').slice(1)
+  const jumbotronImg = jumbotron?.bigImage?.url
+    ? `${baseConfig.server.host}/${jumbotron?.bigImage?.url.slice(1)}`
+    : '/assets/noimg.svg'
 
   return (
     <div className="main-container">
@@ -38,7 +40,7 @@ export default function Jumbotron({ websiteInfo }: { websiteInfo: WebsiteInfo })
         <div className={`flex justify-center flex-col lg:flex-row gap-8 ${baseConfig.style.font.poppins.className}`}>
           <div className="flex-1">
             <Image
-              src={`${baseConfig.server.host}/${jumbotronImg}`}
+              src={jumbotronImg}
               width={600}
               height={600}
               className="rounded-xl"
@@ -48,9 +50,9 @@ export default function Jumbotron({ websiteInfo }: { websiteInfo: WebsiteInfo })
               alt="Jumbotron"></Image>
           </div>
           <div className="flex-1">
-            <h2 className="font-extrabold text-2xl uppercase mb-4">{jumbotron?.title}</h2>
-            <p className="text-lg font-thin tracking-widest">{jumbotron?.description}</p>
-            <p className="text-lg tracking-widest mt-6 font-bold">
+            <h2 className="font-extrabold text-xl md:text-2xl uppercase mb-4">{jumbotron?.title}</h2>
+            <p className="text-base md:text-lg font-thin tracking-widest">{jumbotron?.description}</p>
+            <p className="text-base md:text-lg tracking-widest mt-6 font-bold">
               {websiteInfo.chief} - <span className="text-primary-600">Kepala Desa</span>
             </p>
           </div>

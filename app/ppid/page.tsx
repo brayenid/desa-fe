@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/generals/main-header'
 import NotFoundBox from '@/components/generals/not-found-box'
 import LinkButton from '@/components/ui/link-button'
 import PaginationCustom from '@/components/ui/pagination-form'
@@ -88,7 +89,10 @@ function PPIDButtons() {
   return (
     <div className="space-x-4 my-4 mb-8">
       {buttons.map((b, i) => (
-        <LinkButton url={b.url} key={i} className="!bg-gray-200 !text-gray-600 hover:!text-white hover:!bg-primary-500">
+        <LinkButton
+          url={b.url}
+          key={i}
+          className="!bg-primary-200 !text-gray-600 hover:!text-white hover:!bg-primary-500">
           {b.label}
         </LinkButton>
       ))}
@@ -129,17 +133,13 @@ export default async function Document({ searchParams }: SearchParams) {
 
   const data = (await fetcher(`${baseConfig.server.host}/api/ppids?${query}`)) ?? {}
 
-  if (!data) {
-    return <NotFoundBox text="Tidak ada ditampilkan!" />
-  }
-
   const ppidData: FetchedPPID[] = data?.data
   const pageMeta: PageMeta = data?.meta?.pagination
 
   return (
     <div className="main-container">
       <header className="mb-4">
-        <h1 className="text-2xl font-extrabold tracking-widest uppercase w-full mb-4">PPID</h1>
+        <PageHeader title="PPID" className="text-left mb-4" />
         <p>
           Pejabat Pengelola Informasi dan Dokumentasi Desa (PPID Desa) adalah pejabat yang bertanggung jawab di bidang
           penyimpanan, pendokumentasian, penyediaan, dan/atau pelayanan Informasi Publik Desa.
@@ -155,7 +155,7 @@ export default async function Document({ searchParams }: SearchParams) {
             ))}
           </div>
         ) : (
-          <NotFoundBox text="Maaf kami tidak menemukan publikasi" />
+          <NotFoundBox text="Tidak ada data ditampilkan" />
         )}
       </main>
       {pageMeta?.pageCount > 1 && (

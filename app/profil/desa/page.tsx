@@ -25,6 +25,7 @@ export default async function Profile() {
   })
   const data: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization?${query}`)).data
   const bg = `${baseConfig.server.host}/${data.profileBg?.url.slice(1)}`
+  const logo = data?.logo?.url ? `${baseConfig.server.host}/${data?.logo?.url.slice(1)}` : '/assets/knk.png'
 
   return (
     <div>
@@ -61,26 +62,27 @@ export default async function Profile() {
             <div className="sticky top-20 space-y-7">
               <div className="space-y-12 rounded-xl border overflow-hidden">
                 <div className="flex justify-center bg-gray-100 p-2 py-4 bg-[url(/assets/bg-dark.svg)] bg-cover">
-                  <Image
-                    src={`${baseConfig.server.host}/${data?.logo?.url.slice(1)}`}
-                    width={100}
-                    height={100}
-                    alt={data.webName}
-                  />
+                  <Image src={logo} width={100} height={100} alt={data.webName} />
                 </div>
                 <div className="p-4 space-y-7 !mt-0">
                   <div className="relative">
                     <HeaderStyled className="text-xl mb-2">Visi</HeaderStyled>
-                    <p className="ps-5 text-lg">{data.vision}</p>
+                    <p className="ps-5 text-lg">{data?.vision ? data.vision : '-'}</p>
                   </div>
                   <div className="relative">
                     <HeaderStyled className="text-xl mb-2 before:bg-rose-400">Misi</HeaderStyled>
                     <ol className="list-decimal list-inside ps-5 space-y-2 text-gray-800 text-lg">
-                      {data.mission.map((m, i) => (
-                        <li key={i} className="">
-                          {m.mission}
-                        </li>
-                      ))}
+                      {data?.mission?.length ? (
+                        <>
+                          {data.mission.map((m, i) => (
+                            <li key={i} className="">
+                              {m.mission}
+                            </li>
+                          ))}
+                        </>
+                      ) : (
+                        '-'
+                      )}
                     </ol>
                   </div>
                 </div>

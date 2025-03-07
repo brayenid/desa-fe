@@ -6,6 +6,7 @@ import { baseConfig } from '@/utils/config'
 import { fetcher } from '@/utils/fetched-data'
 import PotentialList from './potential/potential-list'
 import LinkButton from '../ui/link-button'
+import MainHeader from './main-header'
 
 export interface FetchedPotential {
   title: string
@@ -26,7 +27,9 @@ export default function Potential() {
   const potentialMapped = (potentialData ?? []).map((pot) => {
     return {
       title: pot?.title,
-      thumbnail: (pot?.thumbnail?.url).slice(1),
+      thumbnail: pot?.thumbnail?.url
+        ? `${baseConfig.server.host}/${pot?.thumbnail?.url.slice(1)}`
+        : '/assets/noimg.svg',
       slug: pot?.slug,
       publishedAt: pot?.publishedAt
     }
@@ -35,14 +38,15 @@ export default function Potential() {
   return (
     <div className="bg-[url(/assets/bg-sky-dark.svg)] bg-no-repeat bg-cover">
       <div className="main-container">
-        <div className="mb-4 text-white">
-          <h2 className="text-2xl font-bold tracking-widest uppercase">Potensi Desa</h2>
-          <p>Kenali potensi desa</p>
-        </div>
+        <MainHeader title="Potensi Desa" description="Kenali potensi desa" className="text-white" />
         <PotentialList potential={potentialMapped} isLoading={isLoading} />
-        <div className="flex justify-center md:justify-end my-6">
-          <LinkButton url="/potensi">Selengkapnya</LinkButton>
-        </div>
+        {potentialMapped.length ? (
+          <div className="flex justify-center md:justify-end my-6">
+            <LinkButton url="/potensi">Selengkapnya</LinkButton>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   )

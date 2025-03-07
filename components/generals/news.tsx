@@ -6,6 +6,7 @@ import NewsList from './news/news-list'
 import useSWR from 'swr'
 import { baseConfig } from '@/utils/config'
 import { fetcher } from '@/utils/fetched-data'
+import MainHeader from './main-header'
 
 export interface FetchedNews {
   title: string
@@ -31,7 +32,9 @@ export default function News() {
   const mappedNews = ((data?.data as FetchedNews[]) ?? []).map((mappedData) => {
     return {
       title: mappedData?.title ?? '',
-      thumbnail: ((mappedData?.thumbnail?.url as string) ?? '').slice(1),
+      thumbnail: mappedData?.thumbnail?.url
+        ? `${baseConfig.server.host}/${mappedData?.thumbnail?.url.slice(1)}`
+        : '/assets/noimg.svg',
       description: mappedData?.description ?? '',
       publishedAt: mappedData?.publishedAt ? baseConfig.helpers.formatDate(mappedData.publishedAt) : '',
       category: (mappedData?.categories[0]?.category as string | undefined) ?? '',
@@ -41,14 +44,15 @@ export default function News() {
 
   return (
     <div className="main-container">
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold tracking-widest uppercase">Artikel Desa</h2>
-        <p>Dapat informasi aktual dari desa</p>
-      </div>
+      <MainHeader title="Artikel Desa" description="Dapat informasi aktual dari desa" />
       <NewsList newsArr={mappedNews} isLoading={isLoading} />
-      <div className="flex justify-center md:justify-end my-6">
-        <LinkButton url="/artikel">Selengkapnya</LinkButton>
-      </div>
+      {mappedNews.length ? (
+        <div className="flex justify-center md:justify-end my-6">
+          <LinkButton url="/artikel">Selengkapnya</LinkButton>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

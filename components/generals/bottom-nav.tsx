@@ -26,13 +26,17 @@ export default function BottomNav({ websiteInfo }: { websiteInfo: WebsiteInfo })
     fetcher
   )
 
+  const navLogo = websiteInfo?.logo?.url
+    ? `${baseConfig.server.host}/${websiteInfo.logo.url.slice(1)}`
+    : '/assets/knk.png'
+
   const footer: FetchedBottomNav = data?.data?.footer
 
   return (
     <div className="bg-gray-800 text-white border-t-8 border-primary-800">
       <div className="hidden lg:flex justify-between main-container flex-col md:flex-row gap-8 text-center md:text-left items-center md:items-start">
         <div className="flex items-center gap-4 self-center">
-          <Image src={`${baseConfig.server.host}/${websiteInfo.logo.url.slice(1)}`} width={60} height={60} alt="Logo" />
+          <Image src={navLogo} width={60} height={60} alt="Logo" />
           <div className="">
             <h3>{websiteInfo.webName}</h3>
             <p>{websiteInfo.subdistrict}</p>
@@ -69,7 +73,7 @@ export default function BottomNav({ websiteInfo }: { websiteInfo: WebsiteInfo })
       </div>
       <div className="main-container p-8 block lg:hidden">
         <div className="flex items-center justify-center gap-4 self-center mb-6">
-          <Image src={`${baseConfig.server.host}/${websiteInfo.logo.url.slice(1)}`} width={60} height={60} alt="Logo" />
+          <Image src={navLogo} width={60} height={60} alt="Logo" />
           <div className="">
             <h3>{websiteInfo.webName}</h3>
             <p>{websiteInfo.subdistrict}</p>

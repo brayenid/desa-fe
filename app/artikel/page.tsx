@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/generals/main-header'
 import { FetchedNews } from '@/components/generals/news'
 import NewsList from '@/components/generals/news/news-list'
 import NotFoundBox from '@/components/generals/not-found-box'
@@ -74,7 +75,9 @@ export default async function Article({ searchParams }: SearchParams) {
   const mappedNews = ((data?.data as FetchedNews[]) ?? []).map((mappedData) => {
     return {
       title: mappedData?.title ?? '',
-      thumbnail: ((mappedData?.thumbnail?.url as string) ?? '').slice(1),
+      thumbnail: mappedData?.thumbnail?.url
+        ? `${baseConfig.server.host}/${mappedData?.thumbnail?.url.slice(1)}`
+        : '/assets/noimg.svg',
       description: mappedData?.description ?? '',
       publishedAt: mappedData?.publishedAt ? baseConfig.helpers.formatDate(mappedData.publishedAt) : '',
       category: (mappedData?.categories[0]?.category as string | undefined) ?? '',
@@ -86,12 +89,12 @@ export default async function Article({ searchParams }: SearchParams) {
 
   return (
     <div className="main-container">
-      <h1 className="text-2xl font-extrabold tracking-widest uppercase text-center w-full">Artikel</h1>
+      <PageHeader title="Artikel" />
       <Search placeholder="Cari judul atau kategori artikel..." />
       {mappedNews.length > 0 ? (
         <NewsList newsArr={mappedNews} isLoading={false} />
       ) : (
-        <NotFoundBox text="Maaf kami tidak menemukan publikasi" />
+        <NotFoundBox text="Tidak ada data ditampilkan" />
       )}
       {pageMeta?.pageCount > 1 && (
         <PaginationCustom page={pageMeta.page ?? 1} size={pageMeta.pageCount ?? 0} search={filters.keyword} />

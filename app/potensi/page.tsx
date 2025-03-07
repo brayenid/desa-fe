@@ -8,6 +8,7 @@ import { fetcher } from '@/utils/fetched-data'
 import { WebsiteInfo } from '@/utils/types'
 import { Metadata } from 'next'
 import qs from 'qs'
+import noImg from '@/public/assets/noimg.png'
 
 interface SearchParams {
   searchParams: Promise<{ [key: string]: string | undefined }>
@@ -55,14 +56,10 @@ export default async function Potential({ searchParams }: SearchParams) {
 
   const data = (await fetcher(requestPath)) ?? []
 
-  if (!data?.data?.length) {
-    return <NotFoundBox text="Tidak ada ditampilkan!" />
-  }
-
   const mappedPotential = ((data?.data as FetchedPotential[]) ?? []).map((mappedData) => {
     return {
       title: mappedData?.title ?? '',
-      thumbnail: ((mappedData?.thumbnail?.url as string) ?? '').slice(1),
+      thumbnail: mappedData?.thumbnail ? `${baseConfig.server.host}/${mappedData?.thumbnail?.url.slice(1)}` : noImg.src,
       publishedAt: mappedData?.publishedAt ? baseConfig.helpers.formatDate(mappedData.publishedAt) : '',
       slug: mappedData?.slug
     }
@@ -77,7 +74,7 @@ export default async function Potential({ searchParams }: SearchParams) {
       {mappedPotential.length > 0 ? (
         <PotentialList potential={mappedPotential} isLoading={false} />
       ) : (
-        <NotFoundBox text="Maaf kami tidak menemukan publikasi" />
+        <NotFoundBox text="Tidak ada data ditampilkan" />
       )}
       {pageMeta?.pageCount > 1 && (
         <PaginationCustom page={pageMeta.page ?? 1} size={pageMeta.pageCount ?? 0} search={filters.keyword} />
