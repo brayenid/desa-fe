@@ -7,7 +7,7 @@ function GalleryListSkel() {
   return (
     <>
       {Array.from({ length: 3 }).map((_, i) => (
-        <Skeleton key={i} className="w-full min-h-64" />
+        <Skeleton key={i} className="w-full min-h-64 rounded-xl" />
       ))}
     </>
   )
@@ -18,7 +18,7 @@ export default function GalleryList({ galleryArr, isLoading }: { galleryArr: Gal
   if (!galleryArr.length) return <NotFoundBox text="Tidak ada data ditampilkan" />
 
   return (
-    <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
       {galleryArr.map((gallery, i) => (
         <div className="group" key={i}>
           <GalleryCardSwiper gallery={gallery} />

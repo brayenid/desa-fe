@@ -90,7 +90,7 @@ function GallerySlider({
   return (
     <>
       <Swiper
-        spaceBetween={20}
+        spaceBetween={17}
         slidesPerView={4}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         modules={[Navigation, Autoplay]}

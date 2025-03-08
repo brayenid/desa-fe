@@ -6,21 +6,22 @@ import NotFoundBox from '../not-found-box'
 
 function GallerySkel() {
   return (
-    <>
+    <div className="flex gap-4 overflow-x-auto lg:grid lg:grid-cols-2 xl:grid-cols-3 scrollbar-hide">
       {Array.from({ length: 3 }).map((_, i) => (
-        <Skeleton className="w-full min-h-64" key={i} />
+        <Skeleton className="min-w-[80%] lg:w-full min-h-64 rounded-xl" key={i} />
       ))}
-    </>
+    </div>
   )
 }
 
 export default function PotentialList({ potential, isLoading }: { potential: Potential[]; isLoading: boolean }) {
   if (isLoading) return <GallerySkel />
   if (!potential.length) return <NotFoundBox text="Tidak ada data ditampilkan" />
+
   return (
-    <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="flex gap-4 overflow-x-auto lg:grid lg:grid-cols-2 xl:grid-cols-3 scrollbar-hidden">
       {potential.map((potential, i) => (
-        <div className="rounded-xl overflow-hidden bg-white group text-white" key={i}>
+        <div className="min-w-[100%] lg:w-full rounded-xl overflow-hidden bg-white group text-white" key={i}>
           <Link href={`/potensi/${potential.slug}`}>
             <div className="max-h-60 overflow-hidden relative">
               <Image

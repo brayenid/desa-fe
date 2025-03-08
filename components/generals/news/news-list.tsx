@@ -7,11 +7,11 @@ import NotFoundBox from '../not-found-box'
 
 function NewsListSkel() {
   return (
-    <>
+    <div className="flex gap-4 overflow-x-auto sm:grid sm:grid-cols-2 xl:grid-cols-3 scrollbar-hidden">
       {Array.from({ length: 3 }).map((_, i) => (
-        <Skeleton key={i} className="w-full min-h-64" />
+        <Skeleton key={i} className="min-w-[90%] sm:min-w-0 sm:w-full min-h-64 rounded-xl" />
       ))}
-    </>
+    </div>
   )
 }
 
@@ -21,9 +21,9 @@ export default function NewsList({ newsArr, isLoading }: { newsArr: News[]; isLo
   if (!newsArr.length) return <NotFoundBox text="Tidak ada data ditampilkan" />
 
   return (
-    <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="flex gap-4 overflow-x-auto sm:grid sm:grid-cols-2 xl:grid-cols-3 scrollbar-hidden">
       {newsArr.map((news, i) => (
-        <div className="rounded-xl border overflow-hidden group" key={i}>
+        <div className="min-w-[90%] sm:min-w-0 rounded-xl border overflow-hidden group" key={i}>
           <Link href={`/artikel/${news.slug}`}>
             <div className="max-h-52 overflow-hidden relative">
               {news.category && (

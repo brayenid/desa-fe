@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import { fetcher } from '@/utils/fetched-data'
 import ShopList from './shop/shop-list'
 import MainHeader from './main-header'
+import { ChevronRight } from 'lucide-react'
 
 export interface FetchedShop {
   title: string
@@ -48,11 +49,14 @@ export default function Shop() {
   })
 
   return (
-    <div className="main-container">
+    <div className="main-container relative">
+      <div className="h-full w-20 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-white sm:hidden">
+        <ChevronRight />
+      </div>
       <MainHeader title="Belanja Dari Desa" description="Beli produk lokal desa" />
       <ShopList shopsArr={shopsMapped} isLoading={isLoading} />
       {shopsMapped.length ? (
-        <div className="flex justify-end my-6">
+        <div className="flex justify-center md:justify-end my-6">
           <LinkButton url="/belanja">Selengkapnya</LinkButton>
         </div>
       ) : (

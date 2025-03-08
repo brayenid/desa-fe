@@ -7,6 +7,7 @@ import { fetcher } from '@/utils/fetched-data'
 import PotentialList from './potential/potential-list'
 import LinkButton from '../ui/link-button'
 import MainHeader from './main-header'
+import { ChevronRight } from 'lucide-react'
 
 export interface FetchedPotential {
   title: string
@@ -37,7 +38,10 @@ export default function Potential() {
 
   return (
     <div className="bg-[url(/assets/bg-sky-dark.svg)] bg-no-repeat bg-cover">
-      <div className="main-container">
+      <div className="main-container relative">
+        <div className="h-full w-12 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-primary-800 sm:hidden">
+          <ChevronRight className="text-white" />
+        </div>
         <MainHeader title="Potensi Desa" description="Kenali potensi desa" className="text-white" />
         <PotentialList potential={potentialMapped} isLoading={isLoading} />
         {potentialMapped.length ? (

@@ -58,6 +58,15 @@
   }
 }
 
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* Untuk Internet Explorer dan Edge */
+  scrollbar-width: none; /* Untuk Firefox */
+}
+
 /* NAVIGATION */
 
 .container-nav {
@@ -110,7 +119,7 @@
 
 /* GLOBAL CONTAINER */
 .main-container {
-  @apply max-w-screen-xl m-auto p-8 w-full;
+  @apply max-w-screen-xl m-auto p-6 w-full;
 }
 
 .markdown {

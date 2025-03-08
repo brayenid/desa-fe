@@ -73,7 +73,7 @@ export default async function Page({ params }: { params: PageParams }) {
 
   const article: FetchedNews = (await fetcher(`${baseConfig.server.host}/api/articles?${query}`)).data[0] ?? {}
 
-  if (!article) {
+  if (!article.title) {
     notFound()
   }
 
