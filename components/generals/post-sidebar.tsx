@@ -8,7 +8,7 @@ import { FetchedGallery } from './gallery'
 import Link from 'next/link'
 import { FetchedShop } from './shop'
 
-export default async function PostSideBar({ param }: { param: Promise<string> | string }) {
+export default async function PostSideBar({ param }: { param: Promise<string> | string | string[] }) {
   const queryLatestArticles = qs.stringify(
     {
       filters: param
@@ -26,6 +26,9 @@ export default async function PostSideBar({ param }: { param: Promise<string> | 
         thumbnail: {
           fields: ['url']
         }
+      },
+      sort: {
+        publishedAt: 'desc'
       }
     },
     { encodeValuesOnly: true }
@@ -88,7 +91,7 @@ export default async function PostSideBar({ param }: { param: Promise<string> | 
   )
 }
 
-export async function ShopSideBar({ param }: { param: Promise<string> | string }) {
+export async function ShopSideBar({ param }: { param: Promise<string> | string | string[] }) {
   const queryLatestShops = qs.stringify(
     {
       filters: param
@@ -100,6 +103,9 @@ export async function ShopSideBar({ param }: { param: Promise<string> | string }
         : undefined,
       pagination: {
         pageSize: 3
+      },
+      sort: {
+        publishedAt: 'desc'
       },
       fields: ['title', 'publishedAt', 'slug', 'price'],
       populate: {

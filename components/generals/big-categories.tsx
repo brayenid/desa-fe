@@ -5,6 +5,7 @@ import {
   ChartAreaIcon,
   File,
   GalleryHorizontalEndIcon,
+  HandHeart,
   HomeIcon,
   MessageCircle,
   Newspaper,
@@ -57,6 +58,11 @@ export default function BigCategory({ websiteInfo }: { websiteInfo: WebsiteInfo 
       label: 'Saran',
       url: '/saran',
       icon: <MessageCircle className="w-4 h-4 md:w-6 md:h-6" />
+    },
+    {
+      label: 'Bansos',
+      url: '/data/bansos',
+      icon: <HandHeart className="w-4 h-4 md:w-6 md:h-6" />
     }
   ]
 

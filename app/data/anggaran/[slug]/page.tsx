@@ -100,7 +100,7 @@ export default async function Budget({ params }: { params: PageParams }) {
       url: '/data/anggaran'
     },
     {
-      title: await param[0],
+      title: await param,
       isLast: true,
       url: '#'
     }
@@ -110,7 +110,7 @@ export default async function Budget({ params }: { params: PageParams }) {
     <div className="main-container">
       <BreadcrumbCustom data={breadcrumbs} className="mb-8" />
       <div className="text-center mb-8">
-        <h1 className="w-full uppercase font-extrabold text-2xl">
+        <h1 className="w-full uppercase font-bold text-2xl">
           APBDes Tahun Anggaran <span className="text-primary-600">{param}</span>
         </h1>
         <p>Klik untuk melihat detail</p>

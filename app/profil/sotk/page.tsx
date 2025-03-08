@@ -21,19 +21,20 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 }
 
-function SOTKRender({ sotk }: { sotk: FetchedSOTK[] }) {
+async function SOTKRender({ sotk }: { sotk: FetchedSOTK[] }) {
   if (!sotk.length) return <NotFoundBox text="Tidak ada data ditampilkan" />
 
-  const sotkChief = sotk.filter((data) => data.level === 'L1')[0]
-  const sotkMember = sotk.filter((data) => data.level !== 'L1')
+  const websiteInfo: WebsiteInfo =
+    (await fetcher(`${baseConfig.server.host}/api/organization?populate[0]=chiefImg`)).data ?? {}
+  const chiefImg = websiteInfo?.chiefImg?.url
 
   return (
     <>
       <div className="m-auto max-w-96 mb-4">
-        <StaffCard name={sotkChief.name} img={sotkChief?.img?.url} role={sotkChief.role} />
+        <StaffCard name={websiteInfo?.chief} img={chiefImg} role="Kepala Desa" />
       </div>
       <div className="grid gap-8 lg:grid-cols-3 xl:grid-cols-4">
-        {sotkMember.map((data, i) => (
+        {sotk.map((data, i) => (
           <StaffCard key={i} img={data?.img?.url} name={data.name} role={data.role} />
         ))}
       </div>

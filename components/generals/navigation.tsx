@@ -52,9 +52,9 @@ export function Navigation({ websiteInfo }: { websiteInfo: WebsiteInfo }) {
   return (
     <div
       className={`sticky top-0 bg-white z-50 flex items-center md:block justify-between w-full border-b py-1 ${baseConfig.style.font.poppins.className}`}>
-      <nav className="flex max-w-screen-xl mx-auto p-3 pl-0">
+      <nav className="flex max-w-screen-xl mx-auto p-3 pl-0 ">
         <Link href="/" className="flex items-center gap-2 ml-6 p-1">
-          <Image src={navLogo} width={38} height={38} alt="logo" className="w-12 lg:w-7" />
+          <Image src={navLogo} width={38} height={38} alt="logo" />
           <h1 className="text-lg uppercase font-bold hidden md:block">{websiteInfo.webName}</h1>
         </Link>
         <div className="container-nav relative flex-[2]" ref={containerNav}>
@@ -110,7 +110,7 @@ export function Navigation({ websiteInfo }: { websiteInfo: WebsiteInfo }) {
         <button
           className="p-3 hover:bg-gray-50 rounded-full active:scale-110 active:bg-gray-100"
           onClick={toggleVisibility}>
-          <Menu className="text-center w-8 h-8" />
+          <Menu className="text-center w-6 h-6" />
         </button>
       </div>
     </div>

@@ -35,7 +35,7 @@ export function PageHeader({
       <h1 className={cn('text-xl md:text-2xl font-bold tracking-widest uppercase text-center w-full', className)}>
         {title}
       </h1>
-      {description ? <p className="">{description}</p> : ''}
+      {description ? <p className="text-center">{description}</p> : ''}
     </div>
   )
 }

@@ -164,7 +164,7 @@ export default async function Page({ params }: { params: PageParams }) {
           </main>
         </div>
         <div className="w-full flex-[1]">
-          <PostSideBar param={param[0]} />
+          <PostSideBar param={param} />
         </div>
       </div>
     </div>

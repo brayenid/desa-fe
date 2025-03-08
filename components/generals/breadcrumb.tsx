@@ -10,7 +10,7 @@ import {
 import { cn } from '@/lib/utils'
 
 export interface BreadcrumbData {
-  title: string | Promise<string>
+  title: string | Promise<string> | string[]
   url: string
   isLast: boolean
 }

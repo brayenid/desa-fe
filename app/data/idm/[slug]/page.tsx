@@ -72,7 +72,7 @@ export default async function IDM({ params }: { params: PageParams }) {
       url: '/data/idm'
     },
     {
-      title: await param[0],
+      title: await param,
       isLast: true,
       url: '#'
     }
@@ -109,7 +109,7 @@ export default async function IDM({ params }: { params: PageParams }) {
     <div className="main-container">
       <BreadcrumbCustom data={breadcrumbs} className="mb-8" />
       <div className="">
-        <h1 className="w-full uppercase font-extrabold text-2xl mb-4">
+        <h1 className="w-full uppercase font-bold text-2xl mb-4">
           IDM Tahun Anggaran <span className="text-primary-600">{param}</span>
         </h1>
         <p>

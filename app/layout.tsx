@@ -49,7 +49,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${baseConfig.style.font.poppins.className} antialiased w-full overflow-x-hidden pb-16 sm:pb-0`}>
+      <body className={`${baseConfig.style.font.poppins.className} antialiased pb-16 sm:pb-0`}>
         <ErrorBoundary>
           <NextTopLoader showSpinner={false} />
           <TopHeader websiteInfo={data} />

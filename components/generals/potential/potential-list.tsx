@@ -29,10 +29,10 @@ export default function PotentialList({ potential, isLoading }: { potential: Pot
                 width={500}
                 height={500}
                 style={{
-                  objectFit: 'cover',
-                  width: 500,
-                  height: 250
-                }}></Image>
+                  width: '100%',
+                  height: 'auto'
+                }}
+              />
               <div className="absolute top-0 h-full w-full flex items-center justify-center">
                 <h3 className="font-bold mb-2 text-center uppercase tracking-widest w-full bg-gray-100 bg-opacity-80 p-2 text-gray-600 text-lg transition-all group-hover:opacity-0">
                   {potential.title}

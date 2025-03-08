@@ -3,21 +3,52 @@
 import { baseConfig } from '@/utils/config'
 import { fetcher } from '@/utils/fetched-data'
 import { WebsiteInfo } from '@/utils/types'
-import { House, MailOpen, Phone } from 'lucide-react'
+import { Facebook, Globe2Icon, House, Instagram, MailOpen, Phone, Twitter, Youtube } from 'lucide-react'
 import Image from 'next/image'
 import useSWR from 'swr'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion'
+import { ReactNode } from 'react'
+import { MdiWhatsapp } from '../ui/icons/whatsapp'
+
+interface SocialsType {
+  provider: string
+  url: string
+  icon: string | ReactNode
+}
 
 interface FetchedBottomNav {
-  socials: {
-    provider: string
-    url: string
-    icon: string
-  }[]
+  socials: SocialsType[]
   contacts: {
     name: string
     phone: string
   }[]
+}
+
+function Socials({ data }: { data: SocialsType }) {
+  const challengeIcon = (icon: string): ReactNode => {
+    if (icon === 'instagram') {
+      return <Instagram className="w-4 h-4" />
+    } else if (icon === 'facebook') {
+      return <Facebook className="w-4 h-4" />
+    } else if (icon === 'twitter') {
+      return <Twitter className="w-4 h-4" />
+    } else if (icon === 'whatsapp') {
+      return <MdiWhatsapp className="w-4 h-4" />
+    } else if (icon === 'youtube') {
+      return <Youtube className="w-4 h-4" />
+    }
+    return <Globe2Icon className="w-4 h-4" />
+  }
+
+  const iconTemp = challengeIcon(data?.icon as string)
+
+  return (
+    <li className="">
+      <a href={data.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 hover:underline">
+        {iconTemp} {data.provider}
+      </a>
+    </li>
+  )
 }
 
 export default function BottomNav({ websiteInfo }: { websiteInfo: WebsiteInfo }) {
@@ -44,6 +75,14 @@ export default function BottomNav({ websiteInfo }: { websiteInfo: WebsiteInfo })
           </div>
         </div>
         <div className="text-sm">
+          <h3 className="font-bold mb-4">Sosial Media</h3>
+          <ul className="space-y-2 w-full">
+            {footer?.socials?.map((s, i) => (
+              <Socials data={s} key={i} />
+            ))}
+          </ul>
+        </div>
+        <div className="text-sm">
           <h3 className="font-bold mb-4">Kontak Desa</h3>
           <ul className="space-y-2 w-full">
             <li className="flex items-center gap-4">
@@ -65,7 +104,7 @@ export default function BottomNav({ websiteInfo }: { websiteInfo: WebsiteInfo })
           <ul className="space-y-2">
             {(footer?.contacts ?? []).map((contact, i) => (
               <li key={i}>
-                {contact.name} - {contact.phone}
+                - {contact.name} ({contact.phone})
               </li>
             ))}
           </ul>
@@ -80,7 +119,8 @@ export default function BottomNav({ websiteInfo }: { websiteInfo: WebsiteInfo })
             <p>{websiteInfo.regency}</p>
           </div>
         </div>
-        <Accordion type="single" collapsible>
+        {/* Mobile Mode */}
+        <Accordion type="multiple">
           <AccordionItem value="item-1">
             <AccordionTrigger>Kontak Desa</AccordionTrigger>
             <AccordionContent>
@@ -103,12 +143,24 @@ export default function BottomNav({ websiteInfo }: { websiteInfo: WebsiteInfo })
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
+            <AccordionTrigger>Sosial Media</AccordionTrigger>
+            <AccordionContent>
+              <div className="text-sm">
+                <ul className="space-y-2 w-full">
+                  {footer?.socials?.map((s, i) => (
+                    <Socials data={s} key={i} />
+                  ))}
+                </ul>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
             <AccordionTrigger>Nomor Penting</AccordionTrigger>
             <AccordionContent>
               <ul className="space-y-2">
                 {(footer?.contacts ?? []).map((contact, i) => (
                   <li key={i}>
-                    {contact.name} - {contact.phone}
+                    - {contact.name} ({contact.phone})
                   </li>
                 ))}
               </ul>

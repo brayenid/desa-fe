@@ -18,7 +18,7 @@ function FloatingMenuCard({ label, icon, url }: FloatingMenuType) {
   return (
     <li>
       <Link href={url} className={`p-2 block ${isActive ? 'text-primary-600' : 'text-gray-700'}`}>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center gap-1">
           <div>{icon}</div>
           <p className="text-xs">{label}</p>
         </div>
@@ -37,8 +37,8 @@ export default function FloatingMenu() {
 
   return (
     <div className="sm:hidden fixed bottom-0 w-full z-40">
-      <div className="bg-gray-50 p-2 border">
-        <ul className="flex items-center justify-between gap-2">
+      <div className="bg-gray-50 p-2 px-4 border border-gray-200">
+        <ul className="flex items-center justify-around gap-2">
           {menus.map((menu, i) => (
             <FloatingMenuCard label={menu.label} url={menu.url} icon={menu.icon} key={i} />
           ))}

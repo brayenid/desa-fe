@@ -21,11 +21,11 @@ export default function NewsList({ newsArr, isLoading }: { newsArr: News[]; isLo
   if (!newsArr.length) return <NotFoundBox text="Tidak ada data ditampilkan" />
 
   return (
-    <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
       {newsArr.map((news, i) => (
         <div className="rounded-xl border overflow-hidden group" key={i}>
           <Link href={`/artikel/${news.slug}`}>
-            <div className="max-h-60 overflow-hidden relative">
+            <div className="max-h-52 overflow-hidden relative">
               {news.category && (
                 <p className="absolute top-3 right-3 bg-primary-600 p-2 rounded-xl text-white uppercase tracking-widest text-sm">
                   {news.category}

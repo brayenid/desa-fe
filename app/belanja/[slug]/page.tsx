@@ -170,7 +170,7 @@ export default async function Page({ params }: { params: PageParams }) {
               Hubungi Penjual
             </LinkButton>
           </div>
-          <ShopSideBar param={param[0]} />
+          <ShopSideBar param={param} />
         </div>
       </div>
     </div>

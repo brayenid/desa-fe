@@ -5,7 +5,7 @@ export default async function Credit({ websiteInfo }: { websiteInfo: WebsiteInfo
 
   return (
     <div className="bg-gray-900 text-gray-300">
-      <div className="!p-2 main-container text-center text-sm md:text-base">
+      <div className="!p-2 main-container text-center text-sm">
         © {currentYear} - {websiteInfo?.webName} - Powered by{' '}
         <a href="https://brayenluhat.netlify.app" target="_blank" rel="noopener noreferrer">
           KNK

@@ -31,12 +31,21 @@ function StaffSkel() {
 export default function Staff() {
   const swiperRef = useRef<any>(null)
   const { data, isLoading } = useSWR(`${baseConfig.server.host}/api/sotks?populate[0]=img`, fetcher)
+  const { data: chief } = useSWR(`${baseConfig.server.host}/api/organization?populate[0]=chiefImg`, fetcher)
+
+  const chiefInfo = {
+    name: chief?.data?.chief ?? '',
+    role: 'Kepala Desa',
+    img: chief?.data?.chiefImg?.url ?? ''
+  }
 
   const staffs = ((data?.data as FetchedStaff[]) ?? []).map((staff) => ({
     name: staff?.name ?? '',
     role: staff?.role ?? '',
     img: staff?.img?.url
   }))
+
+  staffs.unshift(chiefInfo)
 
   return (
     <div className="main-container">
