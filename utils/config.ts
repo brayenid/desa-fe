@@ -121,5 +121,9 @@ export const baseConfig = {
     host: process.env.NEXT_PUBLIC_STRAPI_URL ?? 'http://localhost:1338',
     key: process.env.STRAPI_TOKEN ?? process.env.NEXT_PUBLIC_STRAPI_TOKEN,
     public: process.env.NEXT_PUBLIC_PUBLIC_URL ?? 'http://localhost:3000'
+  },
+
+  meta: {
+    gaId: process.env.NEXT_PUBLIC_GA ?? ''
   }
 }

@@ -10,6 +10,7 @@ import { Navigation } from '@/components/generals/navigation'
 import { WebsiteInfo } from '@/utils/types'
 import NextTopLoader from 'nextjs-toploader'
 import FloatingMenu from '@/components/generals/floating-menu'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const dynamic = 'force-dynamic'
 
@@ -62,6 +63,7 @@ export default async function RootLayout({
           <FloatingMenu />
         </ErrorBoundary>
       </body>
+      {baseConfig.meta.gaId ? <GoogleAnalytics gaId={baseConfig.meta.gaId} /> : ''}
     </html>
   )
 }

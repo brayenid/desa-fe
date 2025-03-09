@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
 
   return {
-    title: `Cek Data Bansos - ${websiteInfo.webName}`
+    title: `Data Bantuan Sosial - ${websiteInfo.webName}`
   }
 }
 
@@ -29,7 +29,7 @@ const breadcrumbs: BreadcrumbData[] = [
     url: '/data'
   },
   {
-    title: 'SGDs',
+    title: 'Data Bantuan Sosial',
     isLast: true,
     url: '#'
   }
