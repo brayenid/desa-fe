@@ -7,38 +7,43 @@ const pathsToCopy = [
   { src: '.next/static', dest: '.next/standalone/.next/static' }
 ]
 
-// Fungsi rekursif untuk menyalin folder dan file
+// Fungsi rekursif untuk menyalin folder dan file dengan logging
 function copyFolderSync(src, dest) {
-  const srcPath = path.join(__dirname, src)
-  const destPath = path.join(__dirname, dest)
-
-  if (!fs.existsSync(srcPath)) {
+  if (!fs.existsSync(src)) {
     console.warn(`Warning: Source folder "${src}" does not exist. Skipping.`)
     return
   }
 
-  if (!fs.existsSync(destPath)) {
-    fs.mkdirSync(destPath, { recursive: true })
+  // Buat folder tujuan jika belum ada
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true })
   }
 
-  const entries = fs.readdirSync(srcPath, { withFileTypes: true })
+  // Baca isi folder
+  const entries = fs.readdirSync(src, { withFileTypes: true })
 
-  for (const entry of entries) {
-    const entrySrc = path.join(srcPath, entry.name)
-    const entryDest = path.join(destPath, entry.name)
+  entries.forEach((entry) => {
+    const srcPath = path.join(src, entry.name)
+    const destPath = path.join(dest, entry.name)
 
     if (entry.isDirectory()) {
-      copyFolderSync(entrySrc, entryDest)
+      copyFolderSync(srcPath, destPath) // Rekursif untuk folder
     } else {
-      fs.copyFileSync(entrySrc, entryDest)
+      try {
+        fs.copyFileSync(srcPath, destPath) // Salin file
+        console.log(`Copied file: ${srcPath} → ${destPath}`)
+      } catch (err) {
+        console.error(`Error copying file "${srcPath}" → "${destPath}":`, err)
+      }
     }
-  }
+  })
 }
 
-// Eksekusi penyalinan untuk setiap path
+// Jalankan penyalinan untuk setiap path yang diberikan
 pathsToCopy.forEach(({ src, dest }) => {
   try {
-    copyFolderSync(src, dest)
+    console.log(`Copying "${src}" to "${dest}"...`)
+    copyFolderSync(path.resolve(__dirname, src), path.resolve(__dirname, dest))
     console.log(`Successfully copied "${src}" to "${dest}"`)
   } catch (err) {
     console.error(`Error copying "${src}" to "${dest}":`, err)

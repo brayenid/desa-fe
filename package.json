@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
+    "build": "next build && node copy-build.js",
     "start": "next start",
     "lint": "next lint",
     "start-wait": "wait-on http://localhost:1338 && next start",
@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",
-    "@next/third-parties": "^15.2.1",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-navigation-menu": "^1.2.5",
