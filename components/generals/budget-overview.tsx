@@ -34,9 +34,9 @@ export default function BudgetOverview() {
           )}
         </h3>
         <LinkButton
-          url="/data/anggaran"
-          className="!bg-amber-50 hover:!bg-amber-100 border border-amber-400 !text-amber-700">
-          Data Lengkap
+          url="/profil/sotk"
+          className="bg-amber-100 border border-amber-200 !text-gray-700 hover:!bg-amber-200">
+          Selengkapnya
         </LinkButton>
       </div>
     </div>
