@@ -43,7 +43,7 @@ export default function Potential() {
           <ChevronRight className="text-white" />
         </div>
         <MainHeader title="Potensi Desa" description="Kenali potensi desa" className="text-white" />
-        <PotentialList potential={potentialMapped} isLoading={isLoading} />
+        <PotentialList potential={potentialMapped} isLoading={isLoading} isMobile />
         {potentialMapped.length ? (
           <div className="flex justify-center md:justify-end my-6">
             <LinkButton url="/potensi">Selengkapnya</LinkButton>

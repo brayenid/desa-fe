@@ -6,15 +6,13 @@ import { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
 
-const webInfo: WebsiteInfo =
-  (
-    await fetcher(
-      `${baseConfig.server.host}/api/organization?populate[0]=logo&populate[1]=chiefImg&populate[2]=favicon`
-    )
-  ).data ?? []
+export async function generateMetadata(): Promise<Metadata> {
+  // FIX LATER
+  const websiteInfo: WebsiteInfo = (await fetcher(`${baseConfig.server.host}/api/organization`)).data ?? []
 
-export const metadata: Metadata = {
-  title: `Kotak Pesan - ${webInfo.webName}`
+  return {
+    title: `Saran - ${websiteInfo.webName}`
+  }
 }
 
 export default function SuggestionPage() {

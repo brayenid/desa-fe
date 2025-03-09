@@ -92,7 +92,7 @@ export default async function Article({ searchParams }: SearchParams) {
       <PageHeader title="Artikel" />
       <Search placeholder="Cari judul atau kategori artikel..." />
       {mappedNews.length > 0 ? (
-        <NewsList newsArr={mappedNews} isLoading={false} />
+        <NewsList newsArr={mappedNews} isLoading={false} isMobile={false} />
       ) : (
         <NotFoundBox text="Tidak ada data ditampilkan" />
       )}

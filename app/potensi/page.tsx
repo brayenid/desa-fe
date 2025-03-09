@@ -72,7 +72,7 @@ export default async function Potential({ searchParams }: SearchParams) {
       <h2 className="text-2xl font-bold tracking-widest uppercase text-center w-full">Potensi Desa</h2>
       <Search placeholder="Cari judul potensi..." />
       {mappedPotential.length > 0 ? (
-        <PotentialList potential={mappedPotential} isLoading={false} />
+        <PotentialList potential={mappedPotential} isLoading={false} isMobile={false} />
       ) : (
         <NotFoundBox text="Tidak ada data ditampilkan" />
       )}

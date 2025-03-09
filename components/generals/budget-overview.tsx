@@ -33,7 +33,9 @@ export default function BudgetOverview() {
             <>{budget?.expenditureTotal ? baseConfig.helpers.currencyFormat(budget?.expenditureTotal) : `Rp. 0`}</>
           )}
         </h3>
-        <LinkButton url="/data/anggaran" className="bg-amber-500 hover:bg-amber-600">
+        <LinkButton
+          url="/data/anggaran"
+          className="!bg-amber-100 hover:!bg-amber-200 border border-amber-400 text-amber-700">
           Data Lengkap
         </LinkButton>
       </div>

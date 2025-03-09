@@ -32,6 +32,10 @@ export default function Data() {
     {
       label: 'SGDs',
       url: '/data/sgds'
+    },
+    {
+      label: 'Bansos',
+      url: '/data/bansos'
     }
   ]
 

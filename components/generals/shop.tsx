@@ -54,7 +54,7 @@ export default function Shop() {
         <ChevronRight />
       </div>
       <MainHeader title="Belanja Dari Desa" description="Beli produk lokal desa" />
-      <ShopList shopsArr={shopsMapped} isLoading={isLoading} />
+      <ShopList shopsArr={shopsMapped} isLoading={isLoading} isMobile />
       {shopsMapped.length ? (
         <div className="flex justify-center md:justify-end my-6">
           <LinkButton url="/belanja">Selengkapnya</LinkButton>

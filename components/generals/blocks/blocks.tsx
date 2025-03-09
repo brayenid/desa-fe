@@ -92,7 +92,8 @@ function BlockItem({ block }: { block: BlocksType }) {
   } else if ('blocks.seo' === block.__component) {
     return <span></span>
   }
-  return <p className="w-full p-6 bg-red-50 text-red-500 border border-red-400 rounded-xl">Unsupported block type!</p>
+
+  return ''
 }
 
 export default function BlocksView({ blocks, className }: Props) {

@@ -49,7 +49,7 @@ export default function News() {
         <ChevronRight />
       </div>
       <MainHeader title="Artikel Desa" description="Dapat informasi aktual dari desa" />
-      <NewsList newsArr={mappedNews} isLoading={isLoading} />
+      <NewsList newsArr={mappedNews} isLoading={isLoading} isMobile={true} />
       {mappedNews.length ? (
         <div className="flex justify-center md:justify-end my-6">
           <LinkButton url="/artikel">Selengkapnya</LinkButton>

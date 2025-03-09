@@ -65,10 +65,13 @@ export function SafetynetForm() {
             $eq: values.identity
           }
         },
-        populate: ['types']
+        populate: ['types'],
+        fields: ['fullName', 'address', 'birth']
       })
 
       const res: SafetyNet = await fetcher(`${baseConfig.server.host}/api/safetynets-recipients?${query}`)
+
+      console.log(res?.data)
 
       if (res?.data?.length) {
         setData(res.data[0]) // Menyimpan data pertama yang ditemukan

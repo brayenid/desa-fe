@@ -3,25 +3,53 @@ import { Potential } from '@/utils/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import NotFoundBox from '../not-found-box'
+import { cn } from '@/lib/utils'
 
-function GallerySkel() {
+function GallerySkel({ isMobile }: { isMobile: boolean }) {
   return (
-    <div className="flex gap-4 overflow-x-auto lg:grid lg:grid-cols-2 xl:grid-cols-3 scrollbar-hide">
+    <div
+      className={cn({
+        'flex gap-4 overflow-x-auto lg:grid lg:grid-cols-2 xl:grid-cols-3 scrollbar-hide': isMobile,
+        '': !isMobile
+      })}>
       {Array.from({ length: 3 }).map((_, i) => (
-        <Skeleton className="min-w-[80%] lg:w-full min-h-64 rounded-xl" key={i} />
+        <Skeleton
+          className={cn({
+            'min-w-[80%] lg:w-full min-h-64 rounded-xl': isMobile,
+            'w-full min-h-64': !isMobile
+          })}
+          key={i}
+        />
       ))}
     </div>
   )
 }
 
-export default function PotentialList({ potential, isLoading }: { potential: Potential[]; isLoading: boolean }) {
-  if (isLoading) return <GallerySkel />
+export default function PotentialList({
+  potential,
+  isLoading,
+  isMobile
+}: {
+  potential: Potential[]
+  isLoading: boolean
+  isMobile: boolean
+}) {
+  if (isLoading) return <GallerySkel isMobile={isMobile} />
   if (!potential.length) return <NotFoundBox text="Tidak ada data ditampilkan" />
 
   return (
-    <div className="flex gap-4 overflow-x-auto lg:grid lg:grid-cols-2 xl:grid-cols-3 scrollbar-hidden">
+    <div
+      className={cn({
+        'flex gap-4 overflow-x-auto sm:grid md:grid-cols-2 xl:grid-cols-3 scrollbar-hidden': isMobile,
+        'grid gap-8 lg:grid-cols-2 xl:grid-cols-3': !isMobile
+      })}>
       {potential.map((potential, i) => (
-        <div className="min-w-[100%] lg:w-full rounded-xl overflow-hidden bg-white group text-white" key={i}>
+        <div
+          className={cn('', {
+            'min-w-[90%] sm:min-w-0 rounded-xl overflow-hidden group': isMobile,
+            'rounded-xl overflow-hidden group': !isMobile
+          })}
+          key={i}>
           <Link href={`/potensi/${potential.slug}`}>
             <div className="max-h-60 overflow-hidden relative">
               <Image

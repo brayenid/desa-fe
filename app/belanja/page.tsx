@@ -85,7 +85,7 @@ export default async function Shop({ searchParams }: SearchParams) {
       <PageHeader title="Belanja Dari Desa" />
       <Search placeholder="Cari judul penjualan..." />
       {mappedShop.length > 0 ? (
-        <ShopList shopsArr={mappedShop} isLoading={false} />
+        <ShopList shopsArr={mappedShop} isLoading={false} isMobile={false} />
       ) : (
         <NotFoundBox text="Tidak ada data ditampilkan" />
       )}

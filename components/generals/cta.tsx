@@ -17,13 +17,13 @@ export default function CTA({ websiteInfo }: { websiteInfo: WebsiteInfo }) {
           </p>
         </header>
         <div className="flex flex-col md:flex-row gap-4 w-full items-center justify-center">
-          <LinkButton url="/saran" className="flex items-center gap-2">
-            <Send /> Kirim Pesan
+          <LinkButton url="/saran" className="flex items-center gap-2 text-sm sm:text-base">
+            <Send className="w-4 h-4" /> Kirim Pesan
           </LinkButton>
           {websiteInfo.phone ? (
             <a href={`https://wa.me/62${websiteInfo.phone}`} target="_blank" rel="noopener noreferrer">
-              <div className="flex items-center justify-center gap-2 p-2 px-2 rounded overflow-hidden bg-[#25d366] text-white hover:bg-[#1fb155] transition-all uppercase text-sm">
-                <MdiWhatsapp className="w-6 h-6" /> Hubungi Via WA
+              <div className="flex items-center justify-center gap-2 p-2 px-2 rounded overflow-hidden bg-[#25d366] text-white hover:bg-[#1fb155] transition-all uppercase text-sm sm:text-base">
+                <MdiWhatsapp className="w-4 h-4" /> Hubungi Via WA
               </div>
             </a>
           ) : (
