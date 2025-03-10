@@ -130,6 +130,10 @@
   @apply !leading-loose;
 }
 
+.markdown a {
+  @apply text-primary-700 hover:underline;
+}
+
 .markdown h1 {
   @apply text-4xl pb-4;
 }
