@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'mamahakulu-strapi.knkdesa.my.id',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'cms.memahakulu.id',
+        pathname: '/**'
       }
     ]
   },
