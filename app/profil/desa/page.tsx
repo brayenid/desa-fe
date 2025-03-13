@@ -46,7 +46,7 @@ export default async function Profile() {
       )}
       <div className="main-container">
         <header className="text-center">
-          <h1 className="w-full text-3xl uppercase font-bold">
+          <h1 className="w-full text-xl md:text-3xl uppercase font-bold">
             Profil Desa <span className="text-primary-600">{data.webName}</span>
           </h1>
           <p>Kenali desa lebih dekat</p>

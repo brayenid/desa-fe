@@ -135,23 +135,87 @@
 }
 
 .markdown h1 {
-  @apply text-4xl pb-4;
+  @apply text-4xl pb-4 font-bold;
 }
 
 .markdown h2 {
-  @apply text-3xl pb-4 pt-8;
+  @apply text-3xl pb-4 pt-8 font-bold;
 }
 
 .markdown h3 {
-  @apply text-2xl pb-4 pt-8;
+  @apply text-2xl pb-4 pt-8 font-bold;
 }
 
 .markdown h4 {
-  @apply text-lg pb-4;
+  @apply text-lg pb-4 font-bold;
 }
 
 .markdown p {
   @apply pb-4 leading-normal lg:leading-relaxed;
+}
+
+.markdown img {
+  @apply !w-full rounded-xl;
+}
+
+.markdown figure {
+  @apply text-center mx-auto;
+}
+
+.markdown figcaption {
+  @apply text-sm mt-2 mb-4 text-gray-600;
+}
+
+.markdown ul {
+  @apply list-disc ml-4;
+}
+
+.markdown table {
+  @apply w-full border-collapse border border-gray-300;
+}
+
+.markdown table p {
+  @apply p-0;
+}
+
+.markdown th {
+  @apply bg-gray-100 border border-gray-300 px-2 py-2 text-left font-semibold;
+}
+
+.markdown td {
+  @apply border border-gray-300 px-4 py-2;
+}
+
+.markdown tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+.markdown tr:hover {
+  @apply bg-gray-100;
+}
+
+.markdown blockquote {
+  @apply border-l-4 border-primary-500 bg-gray-100 p-4 italic text-gray-700 rounded-md;
+}
+
+.markdown .todo-list {
+  @apply list-none p-0 my-2;
+}
+
+.markdown .todo-list li {
+  @apply flex items-center gap-2;
+}
+
+.markdown .todo-list__label {
+  @apply flex items-center gap-2 cursor-pointer;
+}
+
+.markdown .todo-list__label input[type='checkbox'] {
+  @apply w-4 h-4 accent-blue-500 cursor-not-allowed;
+}
+
+.markdown .todo-list__label__description {
+  @apply text-gray-700;
 }
 
 ol {

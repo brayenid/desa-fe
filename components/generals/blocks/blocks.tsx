@@ -20,6 +20,7 @@ export interface BlocksType {
   id: number
   richText: BlocksContent[]
   images: BlockImages[]
+  ckmd: string
 }
 
 interface BlockImages {
@@ -91,6 +92,8 @@ function BlockItem({ block }: { block: BlocksType }) {
     return <BlocksRenderer content={block.richText as unknown as BlocksContent} />
   } else if ('blocks.seo' === block.__component) {
     return <span></span>
+  } else if ('blocks.ckeditor' === block.__component) {
+    return <div dangerouslySetInnerHTML={{ __html: block.ckmd }} />
   }
 
   return ''

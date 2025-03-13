@@ -47,6 +47,8 @@ function SGDsCard({ label, value, order }: { label: string; value: number; order
 }
 
 function getAvgData(data: SGDsType): number {
+  if (!data.sgds.length) return 0
+
   const total = data.sgds.reduce((acc, curr) => acc + curr.value, 0)
 
   return total / data.sgds.length
@@ -119,17 +121,15 @@ export default async function SGDs() {
           </div>
         </div>
       </header>
-      <main className="grid gap-8 xl:grid-cols-3">
-        {data.sgds.length ? (
-          <>
-            {data.sgds.map((s, i) => (
-              <SGDsCard label={s.indicator} value={s.value} key={i} order={i + 1} />
-            ))}
-          </>
-        ) : (
-          <NotFoundBox text="Tidak ada data ditampilkan" />
-        )}
-      </main>
+      {data.sgds.length ? (
+        <main className="grid gap-8 xl:grid-cols-3">
+          {data.sgds.map((s, i) => (
+            <SGDsCard label={s.indicator} value={s.value} key={i} order={i + 1} />
+          ))}
+        </main>
+      ) : (
+        <NotFoundBox text="Tidak ada data ditampilkan" />
+      )}
     </div>
   )
 }
