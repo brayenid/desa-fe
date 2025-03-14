@@ -39,7 +39,7 @@ export default function Potential() {
   return (
     <div className="bg-[url(/assets/bg-sky-dark.svg)] bg-no-repeat bg-cover">
       <div className="main-container relative">
-        {potentialMapped.length ? (
+        {potentialMapped.length > 1 ? (
           <div className="h-full w-12 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-primary-800 sm:hidden">
             <ChevronRight className="text-white" />
           </div>

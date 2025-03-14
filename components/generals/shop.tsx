@@ -50,7 +50,7 @@ export default function Shop() {
 
   return (
     <div className="main-container relative">
-      {shopsMapped.length ? (
+      {shopsMapped.length > 1 ? (
         <div className="h-full w-20 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-white sm:hidden">
           <ChevronRight />
         </div>
