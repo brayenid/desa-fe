@@ -50,9 +50,13 @@ export default function Shop() {
 
   return (
     <div className="main-container relative">
-      <div className="h-full w-20 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-white sm:hidden">
-        <ChevronRight />
-      </div>
+      {shopsMapped.length ? (
+        <div className="h-full w-20 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-white sm:hidden">
+          <ChevronRight />
+        </div>
+      ) : (
+        ''
+      )}
       <MainHeader title="Belanja Dari Desa" description="Beli produk lokal desa" />
       <ShopList shopsArr={shopsMapped} isLoading={isLoading} isMobile />
       {shopsMapped.length ? (

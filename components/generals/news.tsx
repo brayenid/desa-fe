@@ -45,9 +45,13 @@ export default function News() {
 
   return (
     <div className="main-container relative">
-      <div className="h-full w-20 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-white sm:hidden">
-        <ChevronRight />
-      </div>
+      {mappedNews.length ? (
+        <div className="h-full w-20 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-white sm:hidden">
+          <ChevronRight />
+        </div>
+      ) : (
+        ''
+      )}
       <MainHeader title="Artikel Desa" description="Dapat informasi aktual dari desa" />
       <NewsList newsArr={mappedNews} isLoading={isLoading} isMobile={true} />
       {mappedNews.length ? (

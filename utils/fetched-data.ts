@@ -14,7 +14,7 @@ export async function fetcher(url: string) {
       },
       cache: 'no-store'
     })
-    if (!res.ok) throw new Error(`Fetch failed: ${res.statusText}`)
+    if (!res.ok) throw new Error(`Fetch failed: ${res.statusText} | ${res.status}`)
 
     return await res.json()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

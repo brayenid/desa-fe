@@ -120,7 +120,7 @@ export default async function Budgets({ searchParams }: SearchParams) {
         <PageHeader
           title="APBDes"
           description="Cari data informasi APBDes berdasarkan tahun anggaran"
-          className="text-left md:text-center"
+          className="text-center"
         />
       </div>
 

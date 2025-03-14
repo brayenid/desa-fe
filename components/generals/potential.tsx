@@ -39,9 +39,13 @@ export default function Potential() {
   return (
     <div className="bg-[url(/assets/bg-sky-dark.svg)] bg-no-repeat bg-cover">
       <div className="main-container relative">
-        <div className="h-full w-12 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-primary-800 sm:hidden">
-          <ChevronRight className="text-white" />
-        </div>
+        {potentialMapped.length ? (
+          <div className="h-full w-12 absolute right-0 top-0 z-40 flex items-center justify-center bg-gradient-to-r from-transparent to-primary-800 sm:hidden">
+            <ChevronRight className="text-white" />
+          </div>
+        ) : (
+          ''
+        )}
         <MainHeader title="Potensi Desa" description="Kenali potensi desa" className="text-white" />
         <PotentialList potential={potentialMapped} isLoading={isLoading} isMobile />
         {potentialMapped.length ? (

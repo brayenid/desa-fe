@@ -108,7 +108,7 @@ export default async function IDM({ searchParams }: SearchParams) {
         <PageHeader
           title="IDM"
           description="Cari data informasi IDM berdasarkan tahun anggaran"
-          className="text-left md:text-center"
+          className="text-center"
         />
       </div>
 
