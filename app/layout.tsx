@@ -23,14 +23,21 @@ export async function generateMetadata(): Promise<Metadata> {
       )
     ).data ?? []
 
-  const favicon = `${baseConfig.server.host}/${websiteInfo?.favicon?.url.slice(1)}`
+  if (websiteInfo?.favicon?.url) {
+    const favicon = `${baseConfig.server.host}/${websiteInfo?.favicon?.url.slice(1)}`
+
+    return {
+      title: websiteInfo.webName ?? 'Website',
+      description: websiteInfo.webDesc ?? 'Deskripsi',
+      icons: {
+        icon: favicon
+      }
+    }
+  }
 
   return {
     title: websiteInfo.webName ?? 'Website',
-    description: websiteInfo.webDesc ?? 'Deskripsi',
-    icons: {
-      icon: favicon
-    }
+    description: websiteInfo.webDesc ?? 'Deskripsi'
   }
 }
 
