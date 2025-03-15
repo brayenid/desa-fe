@@ -23,9 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
       )
     ).data ?? []
 
-  const favicon = websiteInfo?.favicon?.url
-    ? `${baseConfig.server.host}/${websiteInfo?.favicon?.url.slice(1)}`
-    : '/assets/favicon.ico'
+  const favicon = `${baseConfig.server.host}/${websiteInfo?.favicon?.url.slice(1)}`
 
   return {
     title: websiteInfo.webName ?? 'Website',
