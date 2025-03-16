@@ -37,7 +37,17 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: websiteInfo.webName ?? 'Website',
-    description: websiteInfo.webDesc ?? 'Deskripsi'
+    description: websiteInfo.webDesc ?? 'Deskripsi',
+    openGraph: {
+      images: [
+        {
+          url: `${baseConfig.server.host}/${websiteInfo.logo.url.slice(1)}`,
+          width: 64,
+          height: 64,
+          alt: websiteInfo.webName ?? ''
+        }
+      ]
+    }
   }
 }
 
