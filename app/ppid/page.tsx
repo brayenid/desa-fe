@@ -87,7 +87,7 @@ function PPIDButtons() {
   ]
 
   return (
-    <div className="space-x-4 my-4 mb-8">
+    <div className="my-4 mb-8 flex flex-wrap gap-2">
       {buttons.map((b, i) => (
         <LinkButton
           url={b.url}
