@@ -277,7 +277,10 @@ function divideByMaritality(data: FetchedResident[]): GeneralDividedData {
 export default async function Resident() {
   const query = qs.stringify(
     {
-      fields: ['name', 'publishedAt', 'address', 'religion', 'sex', 'maritality', 'stats', 'education', 'job', 'birth']
+      fields: ['name', 'publishedAt', 'address', 'religion', 'sex', 'maritality', 'stats', 'education', 'job', 'birth'],
+      pagination: {
+        pageSize: 10000
+      }
     },
     {
       encodeValuesOnly: true
