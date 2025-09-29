@@ -78,22 +78,56 @@ export const baseConfig = {
       }, 0)
     },
     calculateBudget: (data: FetchedBudgets) => {
-      const expenditureObj = data?.budget.expenditure ?? 0
-      const incomeObj = data?.budget.income ?? 0
+      // helper agar aman dari string/null/NaN
+      const toNum = (v: unknown): number => {
+        if (typeof v === 'number' && Number.isFinite(v)) return v
+        const n = Number(v)
+        return Number.isFinite(n) ? n : 0
+      }
+
+      // ---- EXPENDITURE & INCOME: pakai destructuring dgn default, tidak ada overwrite ----
+      const expSrc = (data?.budget?.expenditure ?? {}) as Partial<{
+        communityDev: number
+        communityEmpowerment: number
+        govExpenditure: number
+        villageDevelopment: number
+        emergencyExpenditure: number
+      }>
+
+      const {
+        communityDev = 0,
+        communityEmpowerment = 0,
+        govExpenditure = 0,
+        villageDevelopment = 0,
+        emergencyExpenditure = 0
+      } = expSrc
+
+      const incSrc = (data?.budget?.income ?? {}) as Partial<{
+        originalIncome: number
+        transferIncome: number
+        miscIncome: number
+      }>
+
+      const { originalIncome = 0, transferIncome = 0, miscIncome = 0 } = incSrc
 
       const expenditureTotal =
-        expenditureObj.communityDev +
-        expenditureObj.communityEmpowerment +
-        expenditureObj.govExpenditure +
-        expenditureObj.villageDevelopment +
-        expenditureObj.emergencyExpenditure
+        toNum(communityDev) +
+        toNum(communityEmpowerment) +
+        toNum(govExpenditure) +
+        toNum(villageDevelopment) +
+        toNum(emergencyExpenditure)
 
-      const incomeTotal = incomeObj.originalIncome + incomeObj.transferIncome + incomeObj.miscIncome
+      const incomeTotal = toNum(originalIncome) + toNum(transferIncome) + toNum(miscIncome)
 
-      const financingTotal = baseConfig.helpers.calculateBalance(data?.budget.financing)
+      // ---- FINANCING ----
+      const financing = (data?.budget?.financing ?? []) as Transaction[]
+
+      const financingTotal = baseConfig.helpers.calculateBalance(financing as Financing[])
+
+      const grouped = groupByRole(financing)
       const financingGroupped = {
-        reception: groupByRole(data?.budget.financing).reception.reduce((acc, item) => acc + item.total, 0),
-        spending: groupByRole(data?.budget.financing).spending.reduce((acc, item) => acc + item.total, 0)
+        reception: grouped.reception.reduce((acc, item) => acc + toNum(item.total), 0),
+        spending: grouped.spending.reduce((acc, item) => acc + toNum(item.total), 0)
       }
 
       return {

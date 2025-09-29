@@ -50,7 +50,9 @@ export default async function Budget({ params }: { params: PageParams }) {
   })
 
   const data: FetchedBudgets = (await fetcher(`${baseConfig.server.host}/api/budgets?${query}`)).data[0] ?? {}
-
+  console.log('====================================')
+  console.log(data)
+  console.log('====================================')
   if (!data) {
     return <NotFoundBox text="Tidak ada ditampilkan!" />
   }
